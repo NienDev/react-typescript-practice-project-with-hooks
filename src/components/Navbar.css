@@ -1,0 +1,18 @@
+.select-box {
+  color: #fff !important;
+  border-bottom: 1px solid white !important;
+}
+
+.MuiSvgIcon-root {
+  color: #fff !important;
+}
+
+.login-btn {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.login-btn:hover {
+  color: #fff !important;
+  background-color: #000 !important;
+}
