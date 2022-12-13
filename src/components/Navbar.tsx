@@ -7,26 +7,37 @@ import {
   Select,
   MenuItem,
   Button,
+  Chip,
+  SelectChangeEvent,
+  createTheme,
 } from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import WelcomeMessage from "./WelcomeMessage";
 import "./Navbar.css";
+import { ProgressContext } from "../contexts/ProgressContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navbar = () => {
   const [position, setPosition] = useState<string>("Full-stack Developer"); //generic type
 
-  const onPositionChange = (event: ChangeEvent<{ value: unknown }>) =>
+  // context
+  const { lastTime, status } = useContext(ProgressContext);
+
+  const onPositionChange = (event: SelectChangeEvent<string>) =>
     setPosition(event.target.value as string);
 
   const [time, setTime] = useState<Date>(() => new Date(Date.now()));
+
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date(Date.now())), 1000);
     return () => clearInterval(timer); //cleanup function
   }, []);
 
+
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color={theme} className="appbar-transition">
       <Toolbar>
         <Box
           display="flex"
@@ -39,6 +50,9 @@ const Navbar = () => {
 
           <Box textAlign="center">
             <WelcomeMessage position={position} />
+            <Chip
+              label={`Las time working on this project: ${lastTime} - Status: ${status}`}
+            />
             <Box mt={1}>
               <FormControl>
                 <Select

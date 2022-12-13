@@ -11,7 +11,7 @@ const WelcomeMessage = ({
   country = "Vietnam",
 }: WelcomeMessageProps) => {
   return (
-    <Box ab={1}>
+    <Box>
       Welcome {position} from {country}
     </Box>
   );
